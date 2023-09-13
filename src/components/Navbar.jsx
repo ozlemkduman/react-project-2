@@ -6,7 +6,7 @@ export default function Navbar({isLogIn,handleLogout}) {
     return (
         <>
             <nav className="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
-                <div className="container">
+                <div className="container ">
                     <Link to={"/"} className="navbar-brand">Öz</Link>
                     
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -21,7 +21,10 @@ export default function Navbar({isLogIn,handleLogout}) {
                              {isLogIn===false ?
                                 <NavLink to={"/login"} className="nav-link" >Login</NavLink>
                              :
-                                <NavLink to={"/"} className="nav-link" onClick={handleLogout} >Logout</NavLink>
+                                <>
+                                <NavLink to={"/"} className="nav-link " onClick={handleLogout} >Logout</NavLink>
+                                <NavLink to="/basket" className="nav-link ">Sepet</NavLink>
+                                </>
                              }
 
                         </ul>

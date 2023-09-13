@@ -1,13 +1,13 @@
 
 import ProductsAll from "../components/ProductsAll";
 
-export default function Products() {
+export default function Products({handleClick}) {
 
     
 
     return (
         <>
-            <ProductsAll/>
+            <ProductsAll handleClick={handleClick}/>
        
             
         </>

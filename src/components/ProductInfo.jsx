@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 
-export default function ProductInfo() {
+export default function ProductInfo({ handleClick }) {
 
     const { id } = useParams();
 
@@ -15,15 +15,18 @@ export default function ProductInfo() {
 
     if (!singleProduct) return <p>Ürün yükleniyor...</p>; // Yüklenme mesajı
 
+
     return (
         <div className="container ">
             <div className="row">
                 <div className="col-sm-12 m-4 ">
                     <div className=" product-info-card p-3 d-flex flex-column align-items-center border rounded">
                         <h2 className="mb-4">{singleProduct.title}</h2>
-                        <img src={singleProduct.image} alt={singleProduct.title.substring(0, 10)} />
                         <p>{singleProduct.description}</p>
-                        <button className="btn btn-primary">{singleProduct.price}</button>
+                        <div className="d-flex justify-content-around">
+                            <button className="btn btn-primary me-3" onClick={() => handleClick(singleProduct)}>{singleProduct.price} $</button>
+                            <Link to="/basket" className="btn btn-warning" >Turn to Basket</Link>
+                        </div>
                     </div>
                 </div>
             </div>
