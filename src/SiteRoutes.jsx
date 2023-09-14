@@ -9,6 +9,7 @@ import ProductsLayout from "./components/ProductsLayout";
 import CategoryPage from "./pages/CategoryPage";
 import ProductsAll from "./components/ProductsAll";
 import Login from "./pages/Login";
+import Register from "./components/Register";
 
 export default function SiteRoutes({
     item,
@@ -43,7 +44,7 @@ export default function SiteRoutes({
 
                 </Route>
                 <Route path="/basket" element={<PrivateRoutes  user={user}> <Basket removeItemProduct={removeItemProduct} /> </PrivateRoutes>} ></Route>
-
+                <Route path="/register" element={<Register/>} />
             </Routes>
         </>
     );

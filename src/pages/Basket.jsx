@@ -35,16 +35,16 @@ export default function Basket({ removeItemProduct }) {
                         {controlProduct ?
                             <div className="list-group">
                                 {product.map(item =>
-                                    <React.Fragment key={item.id}>
-                                        <Link className="list-group-item  d-flex justify-content-between" to={`/product-info/${item.id}`}
+                                    <div key={item.id} className="list-group-item  d-flex flex-row justify-content-between">
+                                        <Link className="list-group-item  d-flex   flex-fill" to={`/product-info/${item.id}`}
                                         >
                                             <img style={{ width: "30px" }} src={item.image} alt={item.title} />
-                                            <span className="text-decoration-none text-body-secondary" >{item.title}  </span>
-                                            <span className="text-decoration-none text-body-secondary " >{item.price} $</span>
+                                            <span className="text-decoration-none text-body-secondary flex-fill ms-3 w-50"  >{item.title.substring(0,25)}  </span>
+                                            <span className="text-decoration-none text-body-secondary flex-fill ms-3 " >{item.price} $</span>
                                         </Link>
-                                        <button className="btn btn-warning btn-sm" onClick={() => removeItemProduct(item)} >Sil</button>
+                                        <button className="btn btn-warning btn-sm " onClick={() => removeItemProduct(item)} >Sil</button>
 
-                                    </React.Fragment>
+                                    </div>
                                 )}
                             </div> :
                             <div className="list-group">
