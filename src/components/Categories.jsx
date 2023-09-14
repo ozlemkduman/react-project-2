@@ -20,7 +20,7 @@ export default function Categories() {
             item={item}
             key={index} 
             className="list-group-item list-group-item-action"
-            to={`/products/category/${item}`}
+            to={`/products/category/${encodeURIComponent(item)}`}
             >{item.toUpperCase()}</Link>)}
   
 </div>

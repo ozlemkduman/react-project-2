@@ -1,9 +1,10 @@
 import ProductsAll from "../components/ProductsAll";
 
-export default function Home({item,handleClick}){
-    return(
+export default function Home({ item, handleClick,user }) {
+    return (
         <>
-        <ProductsAll item={item} handleClick={handleClick} />
+            
+            <ProductsAll user={user} item={item} handleClick={handleClick} />
         </>
     )
 }
