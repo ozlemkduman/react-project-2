@@ -25,7 +25,6 @@ export default function Basket({ removeItemProduct }) {
         return item && item.length !== 0;    }
 
     const controlProduct = isThereProduct("products")
-    console.log(controlProduct);
 
     return (
         <>

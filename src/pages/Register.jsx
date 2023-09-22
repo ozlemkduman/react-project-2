@@ -1,23 +1,23 @@
-import { useState } from "react";
-import { signInUser } from "../services/Firebase";
+import { useState } from "react"
+import { createUser } from "../services/Firebase";
 import { useNavigate } from "react-router-dom";
 
-
-export default function Login() {
+export default function Register() {
 
     const navigate = useNavigate()
 
     const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [password, setPassword] = useState("")
+
 
     const onSubmit = async (e) => {
         try {
             e.preventDefault();
-            const user = await signInUser(email, password)
-            navigate("/")
-                        
+        const user = await createUser(email, password)
+        navigate("/login")
+
         } catch (error) {
-            console.log(error.error);
+           
         }
     }
 
@@ -25,8 +25,8 @@ export default function Login() {
         <>
             <div className="row">
                 <div className="col-sm">
-                    <h2>Giriş yap</h2>
-<hr />
+                    <h2>Kayıt Ol</h2>
+                    <hr />
                     <form className="w-50">
                         <div className="mb-3 ">
                             <label htmlFor="exampleInputEmail1" className="form-label ">Email address</label>

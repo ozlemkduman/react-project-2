@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 export default function ({ item, handleClick, user }) {
     const styleImage = {
@@ -16,30 +17,46 @@ export default function ({ item, handleClick, user }) {
         alignItems: "center",
         textAlign: "center"
     }
+
+    const auth = getAuth()
+    const [controlUser, setControlUser] = useState(false)
+
+    useEffect(() => {
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                const uid = user.uid;
+                setControlUser(true)
+                // ...
+            } else {
+                setControlUser(false)
+            }
+        });
+    }, [])
+
     return (
         <>
             <div className="container">
                 <div className="row">
                     <div className="col-sm mb-3" style={styleCard}>
                         <div className="card d-flex flex-column align-items-center mb-1 " style={styleCard} >
-                            <div className="images" style={{ width: "100px"}} >
+                            <div className="images" style={{ width: "100px" }} >
                                 <img src={item.image} style={styleImage} className="card-img-top" alt={item.title} />
 
                             </div>
                             <div className="card-body d-flex flex-column justify-content-between " >
-                                <h5 className="card-title" style={{padding:"5px",height:"100px", fontSize:"22px",width:"100px"}}>{item.title.substring(0, 15)} </h5>
-                                <p className="card-text"style={{padding:"5px",height:"70px",fontSize:"18px",width:"100px"}}>{item.description.substring(0, 20)} </p>
-                                <div className="d-flex justify-content-center "style={{height:"35px", fontSize:"18px", width:"80px",textAlign:"center"}} >
+                                <h5 className="card-title" style={{ padding: "5px", height: "100px", fontSize: "22px", width: "100px" }}>{item.title.substring(0, 15)} </h5>
+                                <p className="card-text" style={{ padding: "5px", height: "70px", fontSize: "18px", width: "100px" }}>{item.description.substring(0, 20)} </p>
+                                <div className="d-flex justify-content-center " style={{ height: "35px", fontSize: "18px", width: "80px", textAlign: "center" }} >
 
-                                    {user && <button onClick={() => handleClick(item)} className="btn btn-primary btn-sm me-1" style={{height:"35px", fontSize:"16px", width:"85px",textAlign:"center"}}>{item.price}$</button>}
-                                    <Link to={`/product-info/${item.id}`} style={{height:"35px", fontSize:"16px", width:"85px",textAlign:"center"}} className="btn btn-warning btn-sm ms-1">İncele</Link>
-                                </div>
-
+                                    {controlUser === true && < button onClick={() => handleClick(item)} className="btn btn-primary btn-sm me-1" style={{ height: "35px", fontSize: "16px", width: "85px", textAlign: "center" }}>{item.price}$</button>}
+                                <Link to={`/product-info/${item.id}`} style={{ height: "35px", fontSize: "16px", width: "85px", textAlign: "center" }} className="btn btn-warning btn-sm ms-1">İncele</Link>
                             </div>
+
                         </div>
                     </div>
                 </div>
             </div>
+        </div >
         </>
     )
 }

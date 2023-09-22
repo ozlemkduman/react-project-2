@@ -1,25 +1,31 @@
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import app from "../firebaseConfig";
-import { getAuth,createUserWithEmailAndPassword } from "firebase/auth";
+
+const auth = getAuth(app);
+
+// Kayıt alma bölümü
+const createUser = async (email, password) => {
+    createUserWithEmailAndPassword(auth, email, password)
+        .then((userInfo) => {
+            // Signed in 
+            const user = userInfo.user;
+            return user
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            // ..
+        });
+
+}
+
+// Giriş yapma bölümü
+const signInUser= async(email,password)=>{
+    signInWithEmailAndPassword(auth,email,password).then(userInfo=>{
+        const user=userInfo.user;
+        return user
+    })
+}
 
 
-
-const auth = getAuth();
-
-
-
-  export const register= async (email,password)=>{
-   await createUserWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed in 
-    const user = userCredential.user;
-    // ...
-    console.log(user);
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // ..
-  });
-  }
-
-
+export  {createUser,signInUser,auth}
