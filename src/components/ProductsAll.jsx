@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import ProductCard from "../components/ProductCard";
+import { AllContext } from "../context/SiteContex";
 
-export default function ProductsAll({handleClick,user}) {
+export default function ProductsAll() {
+    const data=useContext(AllContext)
 
     const [product,setProduct]=useState([]);
 
@@ -18,7 +20,7 @@ export default function ProductsAll({handleClick,user}) {
         <hr/>
         
             <div className="row row-cols-sm-3 row-cols-md-4 row-cols-lg-5">
-            {product.map(item=> <ProductCard user={user} handleClick={handleClick} item={item} key={item.id}/>)}
+            {product.map(item=> <ProductCard  item={item} key={item.id}/>)}
 
             </div>
        

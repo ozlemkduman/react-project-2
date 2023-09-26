@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import ProductCard from "../components/ProductCard";
+import { AllContext } from "../context/SiteContex";
 
-export default function CategoryPage({handleClick,user}){
+export default function CategoryPage(){
     let {categoryName}=useParams()
     const[category,setCategory]=useState([]);
-
+    const data= useContext(AllContext)
     useEffect(()=>{
 
         fetch(`https://fakestoreapi.com/products/category/${categoryName}`)
@@ -17,7 +18,7 @@ export default function CategoryPage({handleClick,user}){
         <>
         <h3>KATEGORİ {categoryName.toUpperCase()}</h3>
         <div className="row row-cols-2">
-            {category.map(item=> <ProductCard user={user} handleClick={handleClick} item={item} key={item.id}/>)}
+            {category.map(item=> <ProductCard  item={item} key={item.id}/>)}
 
             </div>
         </>

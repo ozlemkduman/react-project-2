@@ -1,14 +1,14 @@
 
 import ProductsAll from "../components/ProductsAll";
 
-export default function Products({handleClick,user}) {
+export default function Products() {
 
     
 
     return (
         <>
         <div className="row row-cols-3">
-            <ProductsAll user={user} handleClick={handleClick}/>
+            <ProductsAll/>
             </div>
             
         </>

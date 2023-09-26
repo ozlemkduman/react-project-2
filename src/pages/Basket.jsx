@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { Link } from "react-router-dom";
+import { AllContext } from "../context/SiteContex";
 
-export default function Basket({ removeItemProduct }) {
+export default function Basket() {
+    const data=useContext(AllContext)
 
     const [product, setProduct] = useState([])
 
@@ -11,7 +13,7 @@ export default function Basket({ removeItemProduct }) {
         setProduct(getProduct);
         product.push(getProduct);
 
-    }, [removeItemProduct])
+    }, [data.removeItemProduct])
     let prices = () => {
         const getPrices = JSON.parse(localStorage.getItem("products")) || []
         let priceArray = getPrices.map(item => item.price);
@@ -41,7 +43,7 @@ export default function Basket({ removeItemProduct }) {
                                             <span className="text-decoration-none text-body-secondary flex-fill ms-3 w-50"  >{item.title.substring(0,25)}  </span>
                                             <span className="text-decoration-none text-body-secondary flex-fill ms-3 " >{item.price} $</span>
                                         </Link>
-                                        <button className="btn btn-warning btn-sm " onClick={() => removeItemProduct(item)} >Sil</button>
+                                        <button className="btn btn-warning btn-sm " onClick={() => data.removeItemProduct(item)} >Sil</button>
 
                                     </div>
                                 )}

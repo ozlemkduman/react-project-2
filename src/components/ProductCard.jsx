@@ -1,8 +1,11 @@
-import { useState, useEffect } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth,  } from "firebase/auth";
+import { AllContext } from "../context/SiteContex";
 
-export default function ({ item, handleClick, user }) {
+export default function ProductCard({ item }) {
+    const data=useContext(AllContext)
+
     const styleImage = {
         width: "100%",
         height: "100px",
@@ -19,19 +22,7 @@ export default function ({ item, handleClick, user }) {
     }
 
     const auth = getAuth()
-    const [controlUser, setControlUser] = useState(false)
-
-    useEffect(() => {
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                const uid = user.uid;
-                setControlUser(true)
-                // ...
-            } else {
-                setControlUser(false)
-            }
-        });
-    }, [])
+    
 
     return (
         <>
@@ -48,7 +39,7 @@ export default function ({ item, handleClick, user }) {
                                 <p className="card-text" style={{ padding: "5px", height: "70px", fontSize: "18px", width: "100px" }}>{item.description.substring(0, 20)} </p>
                                 <div className="d-flex justify-content-center " style={{ height: "35px", fontSize: "18px", width: "80px", textAlign: "center" }} >
 
-                                    {controlUser === true && < button onClick={() => handleClick(item)} className="btn btn-primary btn-sm me-1" style={{ height: "35px", fontSize: "16px", width: "85px", textAlign: "center" }}>{item.price}$</button>}
+                                    {data.controlUser === true && < button onClick={() => data.handleClick(item)} className="btn btn-primary btn-sm me-1" style={{ height: "35px", fontSize: "16px", width: "85px", textAlign: "center" }}>{item.price}$</button>}
                                 <Link to={`/product-info/${item.id}`} style={{ height: "35px", fontSize: "16px", width: "85px", textAlign: "center" }} className="btn btn-warning btn-sm ms-1">İncele</Link>
                             </div>
 

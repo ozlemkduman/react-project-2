@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
+import { AllContext } from "../context/SiteContex";
 
-export default function ProductInfo({ handleClick ,user}) {
+export default function ProductInfo() {
 
     const { id } = useParams();
     const navigate = useNavigate()
     const [singleProduct, setSingleProduct] = useState(null);
+    const data=useContext(AllContext)
 
     useEffect(() => {
         fetch(`https://fakestoreapi.com/products/${id}`)
@@ -15,7 +17,7 @@ export default function ProductInfo({ handleClick ,user}) {
 
     if (!singleProduct) return <p>Ürün yükleniyor...</p>; // Yüklenme mesajı
     const handleBackButtonClick = () => {
-        navigate("/products");
+        navigate(-1);
     };
     
 
@@ -28,7 +30,7 @@ export default function ProductInfo({ handleClick ,user}) {
                         <h2 className="mb-4">{singleProduct.title}</h2>
                         <p>{singleProduct.description}</p>
                         <div className="d-flex justify-content-around">
-                            {user && <button className="btn btn-primary me-3" onClick={() => handleClick(singleProduct)}>{singleProduct.price} $</button>}
+                            {data.controlUser && <button className="btn btn-primary me-3" onClick={() => data.handleClick(singleProduct)}>{singleProduct.price} $</button>}
                             <button className="btn btn-warning" onClick={handleBackButtonClick} >Turn to Back</button>
                         </div>
                     </div>

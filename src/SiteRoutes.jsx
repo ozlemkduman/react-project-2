@@ -10,28 +10,26 @@ import CategoryPage from "./pages/CategoryPage";
 import ProductsAll from "./components/ProductsAll";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import { useContext } from "react";
+import { AllContext } from "./context/SiteContex";
 
-export default function SiteRoutes({
-    item,
-    handleClick,
-    user,
-    removeItemProduct
-}) {
+export default function SiteRoutes() {
+    const data=useContext(AllContext)
 
     return (
         <>
             <Routes>
-                <Route path="/" element={<Home handleClick={handleClick} user={user} />} />
-                <Route path="/products" element={<ProductsLayout item={item} handleClick={handleClick} user={user} />} >
-                    <Route index={true} element={<ProductsAll item={item} handleClick={handleClick} user={user} />} />
-                    <Route path="/products/category/:categoryName" element={<CategoryPage handleClick={handleClick} user={user} />} />
+                <Route path="/" element={<Home  />} />
+                <Route path="/products" element={<ProductsLayout   />} >
+                    <Route index={true} element={<ProductsAll />} />
+                    <Route path="/products/category/:categoryName" element={<CategoryPage />} />
                 </Route>
                 <Route path="/about" element={<About />} />
                 <Route path="/contact" element={<Contact />} />
-                <Route path="/product-info/:id" element={<ProductInfo item={item} handleClick={handleClick} user={user} />} />
+                <Route path="/product-info/:id" element={<ProductInfo  />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<Login />} />
-                <Route path="/basket" element={<PrivateRoutes > <Basket removeItemProduct={removeItemProduct} /> </PrivateRoutes>} ></Route>
+                <Route path="/basket" element={<PrivateRoutes > <Basket  /> </PrivateRoutes>} ></Route>
 
             </Routes>
         </>
