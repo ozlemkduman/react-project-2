@@ -5,27 +5,23 @@ const auth = getAuth(app);
 
 // Kayıt alma bölümü
 const createUser = async (email, password) => {
-    createUserWithEmailAndPassword(auth, email, password)
-        .then((userInfo) => {
-            // Signed in 
-            const user = userInfo.user;
-            return user
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            // ..
-        });
-
+    try {
+        const { user } = await createUserWithEmailAndPassword(auth, email, password);
+        // Signed in 
+        return user;
+    } catch (error) {
+        throw error;
+    }
 }
 
 // Giriş yapma bölümü
-const signInUser= async(email,password)=>{
-    signInWithEmailAndPassword(auth,email,password).then(userInfo=>{
-        const user=userInfo.user;
-        return user
-    })
+const signInUser = async (email, password) => {
+    try {
+        const user = await signInWithEmailAndPassword(auth, email, password)
+        return user;
+    } catch (error) {
+        throw error;
+    }
 }
 
-
-export  {createUser,signInUser,auth}
+export { createUser, signInUser, auth }

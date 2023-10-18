@@ -11,27 +11,37 @@ import ProductsAll from "./components/ProductsAll";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import { useContext } from "react";
-import { AllContext } from "./context/SiteContex";
+import { AllContext } from "./context/SiteContext";
 
 export default function SiteRoutes() {
-    const data=useContext(AllContext)
+  const data = useContext(AllContext);
 
-    return (
-        <>
-            <Routes>
-                <Route path="/" element={<Home  />} />
-                <Route path="/products" element={<ProductsLayout   />} >
-                    <Route index={true} element={<ProductsAll />} />
-                    <Route path="/products/category/:categoryName" element={<CategoryPage />} />
-                </Route>
-                <Route path="/about" element={<About />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/product-info/:id" element={<ProductInfo  />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/basket" element={<PrivateRoutes > <Basket  /> </PrivateRoutes>} ></Route>
-
-            </Routes>
-        </>
-    );
+  return (
+    <>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/products" element={<ProductsLayout />}>
+          <Route index={true} element={<ProductsAll />} />
+          <Route
+            path="/products/category/:categoryName"
+            element={<CategoryPage />}
+          />
+        </Route>
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/product-info/:id" element={<ProductInfo />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route
+          path="/basket"
+          element={
+            <PrivateRoutes>
+              {" "}
+              <Basket />{" "}
+            </PrivateRoutes>
+          }
+        ></Route>
+      </Routes>
+    </>
+  );
 }

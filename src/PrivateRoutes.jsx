@@ -1,31 +1,17 @@
 import { useNavigate } from "react-router-dom";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { useEffect, useState } from "react";
+import { useEffect, useContext } from "react";
+import { UserContext } from "./context/UserContext";
 
 export default function PrivateRoutes({ children }) {
   const navigate = useNavigate();
-  const auth = getAuth();
-  const [controlUser, setControlUser] = useState(null);
+
+  const dataCtx = useContext(UserContext);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        const uid = user.uid;
-        setControlUser(true);
-      } else {
-        setControlUser(false);
-      }
-    });
-
-    // Cleanup function
-    return () => unsubscribe();
-  }, [auth]);
-
-  useEffect(() => {
-    if (controlUser === false) {
+    if (dataCtx.controlUser === false) {
       navigate("/");
     }
-  }, [controlUser, navigate]);
+  }, [dataCtx.controlUser]);
 
-  return controlUser ? children : null;
+  return dataCtx.controlUser ? children : null;
 }
